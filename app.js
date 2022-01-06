@@ -1,5 +1,4 @@
 const express = require('express');
-const Http = require('http');
 const cors = require('cors');
 const nunjucks = require('nunjucks');
 
@@ -12,8 +11,7 @@ app.use(cors());
 app.use(express.static("views"));
 
 app.set("view engine", "html");
-nunjucks.configure('views', {
-  autoescape: true,
+nunjucks.configure('views/html', {
   express: app,
   watch: true,
 });
