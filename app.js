@@ -1,8 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const nunjucks = require('nunjucks');
-const db = require("./schemas");
-db();
+const connect = require("./schemas/db");
+connect();
+require('dotenv').config();
 
 const app = express();
 const port = 2222;
