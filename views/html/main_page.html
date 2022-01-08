@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/main_page.css" />
+    <link rel="stylesheet" href="./css/common.css" />
+</head>
+
+<body>
+    <main class="home">
+        <header class="home-header">
+            <h2 class="ir">검색창</h2>
+            <form>
+                <div class="inp-wrap">
+                    <a class="search-btn" href="/main_search">
+                        <img src="./images/icon/icon-search.png" alt="검색버튼" />
+                    </a>
+                    <label for="inp-search"></label>
+                    <input class="inp-search" id="inp-search" type="search" placeholder="감귤마켓 피드" />
+                </div>
+            </form>
+        </header>
+        <!-- 피드 컨텐츠 -->
+        <div id="content_wrapper">
+
+        </div>
+
+        <footer class="footer">
+            <h2 class="ir">푸터메뉴바</h2>
+            <nav class="footer-nav">
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <button>
+                            <!-- <img src="./images/icon/icon-home.svg" alt="홈버튼" /> -->
+                            <span class="home-icon"></span>
+                            홈
+                        </button>
+                    </li>
+                    <li class="menu-item">
+                        <button>
+                            <img src="./images/icon/icon-message-circle.svg" alt="채팅버튼" />
+                            채팅
+                        </button>
+                    </li>
+                    <li class="menu-item">
+                        <button>
+                            <img src="./images/icon/icon-edit.svg" alt="게시물 작성 버튼" />
+                            게시물 작성
+                        </button>
+                    </li>
+                    <li class="menu-item">
+                        <button>
+                            <img src="./images/icon/icon-user.svg" alt="프로필 버튼" />
+                            프로필
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </footer>
+        <div class="modal-wrap">
+            <div class="stick-bar"></div>
+            <ul class="modal-list">
+                <li class="modal-item2">삭제</li>
+                <li class="modal-item2">수정</li>
+            </ul>
+        </div>
+        <div class="backdrop"></div>
+    </main>
+    <script src="../js/renderPost.js"></script>
+    <script src="../js/footer.js"></script>
+    <script>
+        let pageNumber = 1;
+        const contentWrapper = document.getElementById('content_wrapper');
+        const modalWrap = document.querySelector('.modal-wrap');
+
+        // moreButton에 등록해야할 이벤트가 너무 많기 때문에, 부모 요소인 contentWrapper에 이벤트를걸어
+        // moreButton에 걸어서 동작시키려햇던 이벤트 동작을 위임한다. (대신 맡긴다.)
+        contentWrapper.addEventListener('click', modalToggle);
+
+        // contentWrapper영역 어디를 클릭해도 실행되는 modalToggle 함수이기 때문에
+        // 클릭한 event.target이 moreButton영역에 해당하는 할때만 modalWrap에 open 클래스를 토글한다.
+        function modalToggle(event) {
+            if (event.target.className === 'more-img') {
+                modalWrap.classList.toggle('open')
+            }
+        }
+
+        // modalWrap이 열렷을때, 모달 이외의 영역은 클릭되지 않도록하기 위해 backdrop엘리먼트를 깔앗고,
+        // backdrop 클릭시 modal을 닫히게 하기 위해서 이벤트를 등록한다.
+        const backdropEl = document.querySelector('.backdrop');
+        backdropEl.addEventListener('click', () => {
+            // 이 함수 부분이 backdrop 클릭시 실행되는 함수이며
+            // 아래 modalWrap.classList.toggle('open') 을 통해 modalWrap을 닫는다.
+            modalWrap.classList.toggle('open')
+        })
+
+        // onload는 페이지가 모두 로드된 뒤에 최초로 한번만 실행된다.
+        window.onload = function () {
+            // url 주소에 따라 footer의 아이콘을 활성화 시킨다.
+            setActiveTab();
+
+            // 피드 데이터 fetch
+            fetch(`/getPosts?page=${pageNumber}`).then(res => res.json()).then(json => {
+                const { data, page } = json;
+                // 서버로 부터 받아온 fetch 데이터(배열로 구성되어있음)를 하나씩 순회하며 피드를 렌더(renderPost)한다.
+                data.forEach((d) => {
+                    contentWrapper.innerHTML += renderPost(d);
+                });
+            })
+        }
+    </script>
+</body>
+
+</html>

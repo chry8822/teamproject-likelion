@@ -1,0 +1,156 @@
+/* home_feed css */
+.conts {
+  width: 100%;
+}
+.conts-feed {
+  padding: 0px 16px 20px 16px;
+
+  /* header */
+}
+.feed-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.profile-img-wrap {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.feed-profile-img {
+  width: 42px;
+  height: 42px;
+  margin-right: 12px;
+}
+.feed-title h3 {
+  font-size: 14px;
+  font-weight: 500;
+  /* margin-bottom: 2px; */
+}
+.feed-profile-id {
+  font-size: 12px;
+  color: var(--grayfont);
+  line-height: 10px;
+}
+.feed-more-btn {
+  position: relative;
+}
+.more-img {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  top: 4px;
+  right: 0px;
+}
+
+/* feed content*/
+.feed-cont {
+  padding-left: 54px;
+  margin-bottom: 12px;
+}
+.feed-text {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+  margin-bottom: 16px;
+}
+.feed-img-link {
+  width: 100%;
+  height: 100%;
+}
+.feed-img {
+  border-radius: 10px;
+
+  /* feed footer */
+}
+.cont-footer {
+  padding-left: 54px;
+}
+.feed-btn-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.home-icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  background-image: url("../images/icon/icon-home.svg");
+}
+.home-icon.active {
+  background-image: url("../images/icon/icon-home-fill.svg");
+}
+.feed-btn-wrap button {
+  float: left;
+}
+.reply-btn {
+  margin-left: 37px;
+}
+.feed-btn-wrap button img {
+  width: 20px;
+  height: 20px;
+}
+.like-count,
+.reply-count {
+  position: absolute;
+  font-size: 12px;
+  color: var(--grayfont);
+}
+.like-count {
+  left: 26px;
+}
+.reply-count {
+  left: 83px;
+}
+.feed-date {
+  font-size: 10px;
+  color: var(--grayfont);
+}
+
+/* 모달 */
+
+.modal-wrap {
+  position: fixed;
+  bottom: -160px;
+  width: 100%;
+  height: 150px;
+  background-color: #fff;
+  border-radius: 10px 10px 0 0;
+  padding-bottom: 10px;
+  z-index: 100002;
+  transition: all 0.5s;
+}
+.modal-wrap.open {
+  bottom: 0;
+}
+.stick-bar {
+  margin: 16px auto;
+  display: block;
+  width: 50px;
+  height: 4px;
+  background-color: #dbdbdb;
+  border-radius: 5px;
+  line-height: 0;
+}
+.modal-item2 {
+  font-size: 14px;
+  padding: 14px 0 14px 26px;
+  line-height: 18px;
+}
+
+.backdrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 11;
+}
+
+.modal-wrap.open + .backdrop {
+  display: block;
+}

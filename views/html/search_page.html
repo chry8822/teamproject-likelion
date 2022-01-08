@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>search page</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/search_page.css">
+    <link rel="stylesheet" href="./css/main_page.css" />
+</head>
+
+<body>
+    <main>
+        <header class="home-header">
+            <h2 class="ir">검색창</h2>
+            <form onsubmit="searchUser(event)">
+                <div class="inp-wrap search">
+                    <button class="back-btn" type="button"><img src="./images/icon/icon-arrow-left.png"
+                            alt="뒤로가기버튼"></button>
+                    <label for="inp-search"></label>
+                    <input name="searchValue" class="inp-search back" id="inp-search" type="search" placeholder="계정 검색">
+                </div>
+            </form>
+        </header>
+        <!-- 검색 결과 리스트 -->
+        <div id="content_wrapper">
+        </div>
+        <footer class="footer">
+            <h2 class="ir">푸터메뉴바</h2>
+            <nav class="footer-nav">
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <button>
+                            <img src="./images/icon/icon-home.svg" alt="홈버튼">
+                            홈
+                        </button>
+                    </li>
+                    <li class="menu-item">
+                        <button>
+                            <img src="./images/icon/icon-message-circle.svg" alt="채팅버튼">
+                            채팅
+                        </button>
+                    </li>
+                    <li class="menu-item">
+                        <button>
+                            <img src="./images/icon/icon-edit.svg" alt="게시물 작성 버튼">
+                            게시물 작성
+                        </button>
+                    </li>
+                    <li class="menu-item">
+                        <button>
+                            <img src="./images/icon/icon-user.svg" alt="프로필 버튼">
+                            프로필
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </footer>
+    </main>
+    <script src="../js/renderProfile.js"></script>
+    <script>
+        const contentWrapper = document.getElementById('content_wrapper');
+
+        function searchUser(e) {
+            // onSubmit으로 실행되는 함수이기 때문에 페이지 새로고침을 막기위해 preventDefault 한다.
+            e.preventDefault();
+            // 렌더된 유저 프로필 목록을 삭제한다.
+            // (그려진게 없더라도 어차피 비우는것이기 때문에 조건없이 무조건 비우게 해도 상관 없다.)
+            contentWrapper.innerHTML = '';
+
+            // e.target.[element의 name].value;
+            // 검색필드에 입력한 값을 받아온다.
+            const searchValue = e.target.searchValue.value;
+
+            // 검색필드에 입력된 값을 포함하여 서버로 userData를 요청한다.
+            // /searchUser?search=${searchValue} 경로는 임시로 작성한것
+            // app.js의 코드 66번 줄 확인
+            fetch(`/searchUser?search=${searchValue}`)
+                .then(res => res.json())
+                .then(response => {
+                    const { data } = response;
+                    data.forEach((d) => {
+                        contentWrapper.innerHTML += renderProfile(d);
+                    })
+                })
+        }
+
+
+
+    </script>
+</body>
+
+</html>
+
+<!-- 
+    1. 동적으로 엘리먼트를 그려야하는 부분에서는
+    2. 동적으 그려줄 함수를 만든다. ex) renderPost, renderProfile
+
+ -->

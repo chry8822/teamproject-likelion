@@ -1,0 +1,22 @@
+.inp-wrap.search {
+  position: relative;
+  padding: 8px 19px 8px 61px;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--gray);
+}
+.inp-search.back {
+  font-size: 14px;
+  background-color: #f2f2f2;
+  border: none;
+  border-radius: 32px;
+}
+.inp-search.back::placeholder {
+  color: #c4c4c4;
+  font-weight: 400;
+}
+.back-btn {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+}

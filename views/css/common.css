@@ -1,0 +1,94 @@
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+* { font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
+/* 컬러 */
+:root {
+    --gray: #DBDBDB;
+    --grayfont: #767676
+}
+/* ir */
+.ir {
+    overflow:  hidden;
+    border: 0;
+    margin: -1px;
+    width: 1px;
+    height: 1px;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+  }
+
+body {
+    height: 100%;
+    padding: 68px 0 70px 0;
+}  
+
+button, a {
+    cursor: pointer;
+}
+.home {
+    width: 100%;
+    height: 100%;
+}
+
+/* header */
+.home-header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+}
+.inp-wrap{
+    position: relative;
+    width: 100%;
+    height: 48px;
+    border-bottom:0.5px solid var(--gray) ;
+}
+.inp-search {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-indent: 16px;
+    font-size: 18px;
+    font-weight: 500;
+    padding-right: 40px;
+}
+.inp-search::placeholder {
+    color: black;
+}
+.search-btn {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+} 
+
+/* footer */
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #fff;
+}
+.footer-nav {
+    border-top: 0.5px solid var(--gray);
+    padding-top: 14px;
+    width: 100%;
+    height: 60px;
+    box-sizing: border-box;
+}
+.menu-list {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.menu-item button {
+    color:var(--grayfont);
+    text-align: center;
+    font-size: 10px;
+    line-height: 20px;    
+}
+.menu-item img {
+    margin: 0 auto;
+    width: 24px;
+    height: 24px;
+}
